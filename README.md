@@ -1,6 +1,14 @@
 # Unitypackage Exporter
 Unity Editor extension for exporting consistent revisions of unitypackages with custom configurations
 
+## Existing Features
+* Pre-configured package export configurations for exporting consistently versioned and managed unitypackages
+* Automatically managed UPM package manifest versions and version files
+
+## Features In Development
+* Custom package name templates
+* Improved user-friendly configuration manager
+
 ![image](https://user-images.githubusercontent.com/26690821/165518295-08566f54-2096-48ba-8560-e6f196fac852.png)
 
 ![image](https://user-images.githubusercontent.com/26690821/165518475-173bd838-558b-4901-8265-663b9bf7eeb5.png)
@@ -11,6 +19,6 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 ![image](https://user-images.githubusercontent.com/26690821/165519138-3520ab01-8b53-46d0-8b26-862a07500b22.png)
 
 ## Installation via Unitypackage:
-* Download latest UdonExplorer from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+* Download latest Unitypackage Exporter from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
 
 ![image](https://user-images.githubusercontent.com/26690821/165519434-391ca886-9b40-4e88-a9a7-a616798faaba.png)
