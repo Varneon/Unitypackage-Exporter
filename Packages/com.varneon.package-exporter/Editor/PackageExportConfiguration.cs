@@ -16,31 +16,37 @@ namespace Varneon.PackageExporter
         /// <summary>
         /// Name of the export configuration
         /// </summary>
+        [Tooltip("Name of the package")]
         public string Name;
 
         /// <summary>
         /// Directory where the package will be exported
         /// </summary>
+        [Tooltip("Directory where the package will be exported")]
         public string ExportDirectory = "Assets";
 
         /// <summary>
         /// File path of the package manifest
         /// </summary>
+        [Tooltip("[UPM Package Only] Path to the UPM package's manifest file (package.json)")]
         public string ManifestFilePath;
 
         /// <summary>
         /// File path of the version file of the package
         /// </summary>
+        [Tooltip("Path to the version.txt file of the package")]
         public string VersionFilePath;
 
         /// <summary>
         /// Paths that will be exported
         /// </summary>
+        [Tooltip("Paths to be included in the export")]
         public string[] ExportedPaths;
 
         /// <summary>
         /// Options for exporting the package
         /// </summary>
+        [Tooltip("Options for exporting the package")]
         public ExportPackageOptions ExportOptions = ExportPackageOptions.Interactive | ExportPackageOptions.Recurse;
 
         private const string LogPrefix = "[<color=#00AACC>PackageExporter</color>]:";
