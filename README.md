@@ -29,9 +29,9 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 ## Installation via Unity Package Manager (git):
 * Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
 
-![image](https://user-images.githubusercontent.com/26690821/165519138-3520ab01-8b53-46d0-8b26-862a07500b22.png)
+![image](https://user-images.githubusercontent.com/26690821/168448943-c73d762e-c841-428e-a76b-a11ecdf39118.png)
 
 ## Installation via Unitypackage:
 * Download latest Unitypackage Exporter from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
 
-![image](https://user-images.githubusercontent.com/26690821/165519434-391ca886-9b40-4e88-a9a7-a616798faaba.png)
+![image](https://user-images.githubusercontent.com/26690821/168448973-435a4728-0f1c-462b-9a3c-2355dc5e8077.png)
