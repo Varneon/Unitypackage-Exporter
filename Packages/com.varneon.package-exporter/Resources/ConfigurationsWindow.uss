@@ -1,0 +1,57 @@
+.button {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button.addButton {
+    background-image: resource('Icons/Icon_Add');
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.button.browseButton {
+    margin-left: 5px;
+    width: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.fieldContainer {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 5px;
+    margin-bottom: 1px;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 19px;
+}
+
+.button.removeButton {
+    background-image: resource('Icons/Icon_Remove');
+}
+
+.textField {
+    overflow: hidden;
+}
+
+.textField.browseTextField {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 55px;
+}
+
+.foldout {
+    flex-basis: 100%;
+}

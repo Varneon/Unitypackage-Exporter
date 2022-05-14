@@ -1,0 +1,36 @@
+.defaultMargin {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 1px;
+}
+
+#Button_Export {
+    background-color: rgb(42, 42, 42);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#Button_Export:hover {
+    background-color: rgb(64, 117, 128);
+}
+
+.folderFoldout {
+    color: rgb(128, 128, 128);
+    -unity-font-style: bold;
+}
+
+.assetLabel {
+    margin-left: 20px;
+    -unity-font-style: normal;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
