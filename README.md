@@ -23,7 +23,9 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 :-:|:-:
 |Create and edit package export configurations using the configuration editor|Modify the version and the name of the package and preview contents of the package|
 ![ConfigurationsEditor](https://user-images.githubusercontent.com/26690821/168445372-f21d95f6-4564-4966-bf13-b067bc8d846f.png)|![ExporterWindow](https://user-images.githubusercontent.com/26690821/168445249-7ea02f5a-3649-4fe6-bbb4-9b7e2c62d01d.png)
-  
+
+> ## Unity version compatibility notice: This extension has so far only been tested in Unity 2019.4.31f1 (VRChat focused development), support for other versions will be added at a later date if there are errors caused by compatibility issues
+
 ## Installation via Unity Package Manager (git):
 * Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
 
