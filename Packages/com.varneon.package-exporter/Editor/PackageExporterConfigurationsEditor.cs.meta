@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7cec05466790455429d3439e92a16586
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainWindowUxml: {fileID: 9197481963319205126, guid: 1768deaf244d04747bd9f6a536da9aae,
+      type: 3}
+  - configurationBlockUxml: {fileID: 9197481963319205126, guid: 0b70702c102958948a38ed0bcd297daf,
+      type: 3}
+  - folderInclusionBlockUxml: {fileID: 9197481963319205126, guid: 17e602155fae74542b77eeff5c8ff187,
+      type: 3}
+  - assetInclusionBlockUxml: {fileID: 9197481963319205126, guid: bc7aaa205dd8a5145855755dd5ab9533,
+      type: 3}
+  - folderExclusionBlockUxml: {fileID: 9197481963319205126, guid: f83ec37e87f2fb9459f646d1ef3a2a0d,
+      type: 3}
+  - assetExclusionBlockUxml: {fileID: 9197481963319205126, guid: a4bef5d7bcec78e4c9ea1c1fc06c50ea,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
