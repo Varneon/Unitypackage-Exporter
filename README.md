@@ -1,5 +1,16 @@
 # Unitypackage Exporter
 Unity Editor extension for exporting consistent revisions of unitypackages with custom configurations
+---
+
+<div align="center">
+
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Varneon/Unitypackage-Exporter?style=for-the-badge)
+[![GitHub](https://img.shields.io/github/license/Varneon/Unitypackage-Exporter?color=blue&style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/blob/main/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/Unitypackage-Exporter?style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/stargazers)
+[![GitHub all releases](https://img.shields.io/github/downloads/Varneon/Unitypackage-Exporter/total?color=blue&style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/releases)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/Unitypackage-Exporter?color=blue&label=Release&sort=semver&style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+
+</div>
 
 ## Existing Features
 * Pre-configured package export configurations for exporting consistently versioned and managed unitypackages
@@ -7,11 +18,13 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 
 ## Features In Development
 * Custom package name templates
-* Improved user-friendly configuration manager
 
-![image](https://user-images.githubusercontent.com/26690821/165518295-08566f54-2096-48ba-8560-e6f196fac852.png)
+|Configuration Editor|Exporter Window|
+:-:|:-:
+|Create and edit package export configurations using the configuration editor|Modify the version and the name of the package and preview contents of the package|
+![ConfigurationsEditor](https://user-images.githubusercontent.com/26690821/168445372-f21d95f6-4564-4966-bf13-b067bc8d846f.png)|![ExporterWindow](https://user-images.githubusercontent.com/26690821/168445249-7ea02f5a-3649-4fe6-bbb4-9b7e2c62d01d.png)
 
-![image](https://user-images.githubusercontent.com/26690821/165518475-173bd838-558b-4901-8265-663b9bf7eeb5.png)
+> ## Unity version compatibility notice: This extension has so far only been tested in Unity 2019.4.31f1 (VRChat focused development), support for other versions will be added at a later date if there are errors caused by compatibility issues
 
 ## Installation via Unity Package Manager (git):
 * Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
