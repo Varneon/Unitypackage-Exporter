@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.IO;
 using System.Linq;
@@ -209,6 +208,11 @@ namespace Varneon.PackageExporter
         private bool isWindowFocused = true;
 
         private PackagePreviewDirectoryWalker packagePreviewDirectoryWalker;
+
+        /// <summary>
+        /// A string which will be replaced with the version number if included in the file name
+        /// </summary>
+        private const string VersionReplaceString = "{%v}";
 
         private struct PackagePreviewDirectoryWalker
         {
@@ -696,7 +700,12 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void UpdateOutputFileName()
         {
-            fileName = $"{activeConfiguration.Name}_v{PackageVersion}";
+            if (activeConfiguration.Name.Contains(VersionReplaceString)) {
+                fileName = activeConfiguration.Name.Replace(VersionReplaceString, PackageVersion);;
+            }
+            else {
+                fileName = $"{activeConfiguration.Name}_v{PackageVersion}";
+            }
 
             packageNameField.SetValueWithoutNotify(fileName);
 
