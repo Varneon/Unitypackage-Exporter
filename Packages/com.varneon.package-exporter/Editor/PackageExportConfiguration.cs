@@ -26,6 +26,11 @@ namespace Varneon.PackageExporter
         public string ExportDirectory = "Assets";
 
         /// <summary>
+        /// Template for the exported package name
+        /// </summary>
+        public string FileNameTemplate = "{n}_v{v}";
+
+        /// <summary>
         /// [UPM Package Only] Package Manifest of the UPM package (package.json)
         /// </summary>
         public PackageManifest PackageManifest;
@@ -136,6 +141,16 @@ namespace Varneon.PackageExporter
             }
 
             return string.Empty;
+        }
+
+        public string GenerateFileName(string versionString)
+        {
+            return PackageFileNameUtility.GenerateName(this, versionString);
+        }
+
+        public bool IsFileNameTemplateValid()
+        {
+            return PackageFileNameUtility.IsNameValid(FileNameTemplate);
         }
     }
 }

@@ -86,16 +86,40 @@ namespace Varneon.PackageExporter
                     isPackageVersionValid = value;
 
                     invalidVersionNotification.style.display = value ? DisplayStyle.None : DisplayStyle.Flex;
-
-                    exportButton.SetEnabled(value);
                 }
+
+                exportButton.SetEnabled(value && isFileNameValid);
             }
+            get => isPackageVersionValid;
         }
 
         /// <summary>
         /// Name of the unitypackage to be exported
         /// </summary>
         private string fileName;
+
+        /// <summary>
+        /// Name of the unitypackage to be exported
+        /// </summary>
+        private string FileName
+        {
+            set
+            {
+                isFileNameValid = PackageFileNameUtility.IsNameValid(value);
+
+                invalidFileNameNotification.style.display = isFileNameValid ? DisplayStyle.None : DisplayStyle.Flex;
+
+                exportButton.SetEnabled(isFileNameValid && IsPackageVersionValid);
+
+                fileName = value;
+            }
+            get => fileName;
+        }
+
+        /// <summary>
+        /// Is the current package file name valid
+        /// </summary>
+        private bool isFileNameValid;
 
         /// <summary>
         /// Has the user modified the name
@@ -177,6 +201,11 @@ namespace Varneon.PackageExporter
         /// TextField for previewing and modifying the final package name
         /// </summary>
         private TextField packageNameField;
+
+        /// <summary>
+        /// Notification for indicating that the file name of the package is invalid
+        /// </summary>
+        private VisualElement invalidFileNameNotification;
 
         /// <summary>
         /// Button for resetting the package name to origican naming pattern
@@ -340,7 +369,9 @@ namespace Varneon.PackageExporter
 
             packageNameField = rootVisualElement.Q<TextField>("TextField_PackageName");
 
-            packageNameField.RegisterValueChangedCallback(a => { fileName = a.newValue; IsPackageNameDirty = true; });
+            packageNameField.RegisterValueChangedCallback(a => { FileName = a.newValue; IsPackageNameDirty = true; });
+
+            invalidFileNameNotification = rootVisualElement.Q<VisualElement>("Notification_InvalidFileName");
 
             resetPackageNameButton = rootVisualElement.Q<Button>("Button_ResetPackageName");
 
@@ -696,9 +727,9 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void UpdateOutputFileName()
         {
-            fileName = $"{activeConfiguration.Name}_v{PackageVersion}";
+            FileName = activeConfiguration.GenerateFileName(packageVersion);
 
-            packageNameField.SetValueWithoutNotify(fileName);
+            packageNameField.SetValueWithoutNotify(FileName);
 
             IsPackageNameDirty = false;
         }
@@ -783,7 +814,7 @@ namespace Varneon.PackageExporter
                 AssetDatabase.Refresh();
             }
 
-            AssetDatabase.ExportPackage(pathsToExport.ToArray(), $"{Path.Combine(activeConfiguration.ExportDirectory, fileName)}.unitypackage", activeConfiguration.ShowPackageInFileBrowserAfterExport ? ExportPackageOptions.Interactive : ExportPackageOptions.Default);
+            AssetDatabase.ExportPackage(pathsToExport.ToArray(), $"{Path.Combine(activeConfiguration.ExportDirectory, FileName)}.unitypackage", activeConfiguration.ShowPackageInFileBrowserAfterExport ? ExportPackageOptions.Interactive : ExportPackageOptions.Default);
 
             if (manifestModified)
             {

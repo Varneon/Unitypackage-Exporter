@@ -26,6 +26,10 @@
     <ui:TextField picking-mode="Ignore" name="TextField_PackageName" class="defaultMargin">
         <Style src="ExporterWindow.uss" />
     </ui:TextField>
+    <ui:VisualElement name="Notification_InvalidFileName" class="defaultMargin" style="background-color: rgb(89, 0, 0); border-left-color: rgb(196, 196, 196); border-right-color: rgb(196, 196, 196); border-top-color: rgb(196, 196, 196); border-bottom-color: rgb(196, 196, 196); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; display: none;">
+        <Style src="ExporterWindow.uss" />
+        <ui:Label text="Package file name is invalid!" />
+    </ui:VisualElement>
     <ui:Button text="Reset Package Name" name="Button_ResetPackageName" style="margin-left: 5px; margin-right: 5px; display: none;">
         <Style src="ExporterWindow.uss" />
     </ui:Button>

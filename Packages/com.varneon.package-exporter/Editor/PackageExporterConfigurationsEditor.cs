@@ -114,6 +114,18 @@ namespace Varneon.PackageExporter
                 }
             };
 
+            VisualElement invalidFileNameTemplateNotifcation = container.Q<VisualElement>("InvalidNameTemplateNotifcation");
+
+            TextField fileNameTemplateTextField = container.Q<TextField>("TextField_NameTemplate");
+            fileNameTemplateTextField.value = configuration.FileNameTemplate;
+            fileNameTemplateTextField.RegisterValueChangedCallback(a => {
+                configuration.FileNameTemplate = a.newValue;
+                invalidFileNameTemplateNotifcation.style.display = configuration.IsFileNameTemplateValid() ? DisplayStyle.None : DisplayStyle.Flex;
+                MarkConfigurationsDirty();
+            });
+
+            container.Q<Button>("Button_ResetNameTemplate").clicked += () => fileNameTemplateTextField.value = "{n}_v{v}";
+
             ObjectField versionField = container.Q<ObjectField>("ObjectField_VersionFile");
             versionField.objectType = typeof(TextAsset);
             versionField.RegisterValueChangedCallback(a => configuration.VersionFile = a.newValue as TextAsset);
