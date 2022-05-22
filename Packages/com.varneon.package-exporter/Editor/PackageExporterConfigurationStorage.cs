@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -12,11 +13,17 @@ namespace Varneon.PackageExporter
     {
         public List<PackageExportConfiguration> Configurations = new List<PackageExportConfiguration>();
 
+        [Obsolete("Use LoadAllConfigurationStorages() instead to get all of the configuration storages from the project")]
         internal static PackageExporterConfigurationStorage Load()
         {
-            string[] configurationGUIDs = AssetDatabase.FindAssets("t: PackageExporterConfigurationStorage");
+            return LoadAllConfigurationStorages()?[0];
+        }
 
-            if (configurationGUIDs.Length == 0)
+        internal static PackageExporterConfigurationStorage[] LoadAllConfigurationStorages()
+        {
+            PackageExporterConfigurationStorage[] storages = Resources.FindObjectsOfTypeAll<PackageExporterConfigurationStorage>();
+
+            if (storages.Length == 0)
             {
                 string path = EditorUtility.SaveFilePanelInProject("Create Package Exporter Configuration", "PackageExporterConfigurations", "asset", string.Empty, "Assets");
 
@@ -25,19 +32,19 @@ namespace Varneon.PackageExporter
                     return null;
                 }
 
-                PackageExporterConfigurationStorage configurations = CreateInstance<PackageExporterConfigurationStorage>();
+                PackageExporterConfigurationStorage storage = CreateInstance<PackageExporterConfigurationStorage>();
 
-                AssetDatabase.CreateAsset(configurations, path);
+                AssetDatabase.CreateAsset(storage, path);
 
                 AssetDatabase.SaveAssets();
 
                 AssetDatabase.Refresh();
 
-                return configurations;
+                return new PackageExporterConfigurationStorage[] { storage };
             }
             else
             {
-                return (PackageExporterConfigurationStorage)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(configurationGUIDs[0]), typeof(PackageExporterConfigurationStorage));
+                return storages;
             }
         }
     }
