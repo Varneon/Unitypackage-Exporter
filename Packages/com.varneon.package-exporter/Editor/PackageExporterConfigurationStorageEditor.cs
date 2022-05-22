@@ -7,8 +7,8 @@ using System.IO;
 
 namespace Varneon.PackageExporter
 {
-    [CustomEditor(typeof(PackageExporterConfigurations))]
-    internal class PackageExporterConfigurationsEditor : Editor
+    [CustomEditor(typeof(PackageExporterConfigurationStorage))]
+    internal class PackageExporterConfigurationStorageEditor : Editor
     {
         [SerializeField]
         private VisualTreeAsset
@@ -23,13 +23,13 @@ namespace Varneon.PackageExporter
 
         private ListView configurationListView;
 
-        private PackageExporterConfigurations configurations;
+        private PackageExporterConfigurationStorage configurations;
 
         private ScrollView inspectorScrollView;
 
         private void OnEnable()
         {
-            configurations = (PackageExporterConfigurations)target;
+            configurations = (PackageExporterConfigurationStorage)target;
         }
 
         private void FindInspectorScrollView()

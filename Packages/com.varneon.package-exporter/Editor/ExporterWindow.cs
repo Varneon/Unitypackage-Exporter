@@ -24,7 +24,7 @@ namespace Varneon.PackageExporter
         /// <summary>
         /// The scriptable object for storing all package export configurations
         /// </summary>
-        private PackageExporterConfigurations packageConfigurations;
+        private PackageExporterConfigurationStorage packageConfigurations;
 
         /// <summary>
         /// The active package export configuration
@@ -431,7 +431,7 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void LoadPackageConfigurationsFile()
         {
-            packageConfigurations = PackageExporterConfigurations.Load();
+            packageConfigurations = PackageExporterConfigurationStorage.Load();
 
             if (packageConfigurations == null)
             {

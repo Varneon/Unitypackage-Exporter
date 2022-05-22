@@ -8,13 +8,13 @@ namespace Varneon.PackageExporter
     /// <summary>
     /// Preferences asset for storing definitions for the packages that will be exported from the active Unity project
     /// </summary>
-    internal class PackageExporterConfigurations : ScriptableObject
+    internal class PackageExporterConfigurationStorage : ScriptableObject
     {
         public List<PackageExportConfiguration> Configurations = new List<PackageExportConfiguration>();
 
-        internal static PackageExporterConfigurations Load()
+        internal static PackageExporterConfigurationStorage Load()
         {
-            string[] configurationGUIDs = AssetDatabase.FindAssets("t: PackageExporterConfigurations");
+            string[] configurationGUIDs = AssetDatabase.FindAssets("t: PackageExporterConfigurationStorage");
 
             if (configurationGUIDs.Length == 0)
             {
@@ -25,7 +25,7 @@ namespace Varneon.PackageExporter
                     return null;
                 }
 
-                PackageExporterConfigurations configurations = CreateInstance<PackageExporterConfigurations>();
+                PackageExporterConfigurationStorage configurations = CreateInstance<PackageExporterConfigurationStorage>();
 
                 AssetDatabase.CreateAsset(configurations, path);
 
@@ -37,7 +37,7 @@ namespace Varneon.PackageExporter
             }
             else
             {
-                return (PackageExporterConfigurations)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(configurationGUIDs[0]), typeof(PackageExporterConfigurations));
+                return (PackageExporterConfigurationStorage)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(configurationGUIDs[0]), typeof(PackageExporterConfigurationStorage));
             }
         }
     }
