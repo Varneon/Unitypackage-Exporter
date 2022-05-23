@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -35,6 +36,17 @@ namespace Varneon.PackageExporter
                 AssetDatabase.SaveAssets();
 
                 AssetDatabase.Refresh();
+
+                try
+                {
+                    EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow"));
+
+                    AssetDatabase.OpenAsset(storage);
+                }
+                catch(Exception e)
+                {
+                    Debug.LogError(e);
+                }
 
                 return new PackageExporterConfigurationStorage[] { storage };
             }
