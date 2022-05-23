@@ -3,12 +3,12 @@
         <Style src="ExporterWindow.uss" />
         <ui:Label text="Configuration:" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
         <ui:VisualElement style="flex-shrink: 0; flex-grow: 1;">
-            <uie:ToolbarMenu name="ConfigurationMenu" text="&lt;ConfigurationName&gt;" style="flex-shrink: 0; flex-grow: 1;" />
+            <uie:ToolbarMenu name="ConfigurationMenu" text="&lt;ConfigurationName&gt;" tooltip="The active configuration to use for the export" style="flex-shrink: 0; flex-grow: 1;" />
         </ui:VisualElement>
         <uie:ToolbarButton name="Button_ReloadConfiguration" tooltip="Reload Configuration" style="background-image: resource(&apos;Icons/Icon_Reload&apos;); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-shrink: 0; -unity-background-image-tint-color: rgb(204, 204, 204); width: 20px; height: 20px;" />
         <uie:ToolbarButton name="Button_OpenConfigurations" tooltip="Open Configurations" style="background-image: resource(&apos;Icons/Icon_Gear&apos;); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-shrink: 0; width: 20px; height: 20px; -unity-background-image-tint-color: rgb(204, 204, 204);" />
     </uie:Toolbar>
-    <ui:TextField picking-mode="Ignore" label="Version:" name="TextField_Version" class="defaultMargin">
+    <ui:TextField picking-mode="Ignore" label="Version:" name="TextField_Version" tooltip="Version of the package (e.g. &quot;1.2.3&quot;, &lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;)" class="defaultMargin">
         <Style src="ExporterWindow.uss" />
     </ui:TextField>
     <ui:VisualElement name="LastVersionIndicator" class="defaultMargin" style="flex-direction: row; display: none;">
@@ -20,7 +20,7 @@
         <Style src="ExporterWindow.uss" />
         <ui:Label text="Invalid version! Please provide valid version in following format: [&lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;], e.g. 1.0.2" style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; white-space: normal;" />
     </ui:VisualElement>
-    <ui:Label text="Unitypackage Name:" class="defaultMargin">
+    <ui:Label text="Unitypackage Name:" tooltip="The final file name of the exported package" class="defaultMargin">
         <Style src="ExporterWindow.uss" />
     </ui:Label>
     <ui:TextField picking-mode="Ignore" name="TextField_PackageName" class="defaultMargin">
@@ -33,7 +33,7 @@
     <ui:Button text="Reset Package Name" name="Button_ResetPackageName" style="margin-left: 5px; margin-right: 5px; display: none;">
         <Style src="ExporterWindow.uss" />
     </ui:Button>
-    <ui:Label text="Package Preview:" class="defaultMargin">
+    <ui:Label text="Package Preview:" tooltip="Preview of the package file structure" class="defaultMargin">
         <Style src="ExporterWindow.uss" />
     </ui:Label>
     <ui:VisualElement style="flex-grow: 1; flex-shrink: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 34px; border-left-color: rgb(128, 128, 128); border-right-color: rgb(128, 128, 128); border-top-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px;">
@@ -48,10 +48,10 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Button text="Export Package" name="Button_Export" class="defaultMargin" style="height: 24px; margin-bottom: 5px; position: absolute; bottom: 0; right: 0; width: 100px;">
+    <ui:Button text="Export Package" name="Button_Export" tooltip="Export this package" class="defaultMargin" style="height: 24px; margin-bottom: 5px; position: absolute; bottom: 0; right: 0; width: 100px;">
         <Style src="ExporterWindow.uss" />
     </ui:Button>
-    <ui:Label name="Label_FileSizePreview" class="defaultMargin" style="bottom: 0; left: 0; height: 24px; -unity-text-align: middle-left; margin-bottom: 5px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(128, 128, 128); border-right-color: rgb(128, 128, 128); border-top-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128); background-color: rgb(64, 64, 64); flex-grow: 1; margin-right: 0; position: absolute; right: 110px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;">
+    <ui:Label name="Label_FileSizePreview" tooltip="How many files are included in the package and how much space are they currently using on your disk" class="defaultMargin" style="bottom: 0; left: 0; height: 24px; -unity-text-align: middle-left; margin-bottom: 5px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(128, 128, 128); border-right-color: rgb(128, 128, 128); border-top-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128); background-color: rgb(64, 64, 64); flex-grow: 1; margin-right: 0; position: absolute; right: 110px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;">
         <Style src="ExporterWindow.uss" />
     </ui:Label>
 </ui:UXML>
