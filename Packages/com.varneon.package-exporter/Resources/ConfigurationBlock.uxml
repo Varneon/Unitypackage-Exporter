@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement style="height: 26px; background-color: rgb(82, 82, 82); border-top-width: 1px; border-bottom-width: 1px; border-top-color: rgb(128, 128, 128); border-bottom-color: rgb(41, 41, 41); justify-content: center;">
+    <ui:VisualElement class="configurationHeader">
         <Style src="ConfigurationsWindow.uss" />
         <ui:Label text="&lt;ConfigurationName&gt;" name="Label_ConfigurationName" style="-unity-text-align: middle-left; font-size: 16px; margin-left: 4px; -unity-font-style: bold; margin-right: 26px;" />
-        <ui:Button name="Button_RemoveConfiguration" tooltip="Remove this configuration" class="button removeButton" style="position: absolute; top: 2px; right: 2px; bottom: 2px; width: 20px; height: 20px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+        <ui:Button name="Button_RemoveConfiguration" tooltip="Remove this configuration" class="button removeButton" style="width: 20px; height: 20px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
     </ui:VisualElement>
     <ui:VisualElement name="PropertyContainer" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; background-color: rgb(46, 46, 46);">
         <Style src="ConfigurationsWindow.uss" />

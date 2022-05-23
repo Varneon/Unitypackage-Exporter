@@ -1,3 +1,16 @@
+.configurationHeader {
+    border-top-color: rgba(143, 150, 190, 255);
+    border-bottom-color: rgba(47, 50, 63, 255);
+    background-color: rgba(96, 101, 128, 255);
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    height: 26px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 2px;
+}
+
 .button {
     margin-left: 0;
     margin-right: 0;
