@@ -21,6 +21,9 @@ namespace Varneon.PackageExporter
         [SerializeField]
         private VisualTreeAsset mainWindowUxml, noConfigurationsFileUxml, noConfigurationsUxml;
 
+        /// <summary>
+        /// All available configuration storages in the project
+        /// </summary>
         private PackageExporterConfigurationStorage[] packageExporterConfigurationStorages;
 
         /// <summary>
