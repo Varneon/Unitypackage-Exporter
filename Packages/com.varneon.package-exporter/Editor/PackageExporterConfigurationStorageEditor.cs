@@ -210,8 +210,6 @@ namespace Varneon.PackageExporter
         {
             PackageExportConfiguration configuration = configurations.AddConfiguration();
 
-            configurations.Configurations.Add(configuration);
-
             AddConfigurationBlock(configuration);
 
             MarkConfigurationsDirty();
