@@ -28,6 +28,8 @@ namespace Varneon.PackageExporter
 
                 PackageExporterConfigurationStorage storage = CreateInstance<PackageExporterConfigurationStorage>();
 
+                storage.AddConfiguration();
+
                 AssetDatabase.CreateAsset(storage, path);
 
                 AssetDatabase.SaveAssets();
@@ -40,6 +42,20 @@ namespace Varneon.PackageExporter
             {
                 return storages;
             }
+        }
+
+        /// <summary>
+        /// Adds a new configuration to the storage
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public PackageExportConfiguration AddConfiguration(PackageExportConfiguration configuration = null)
+        {
+            if (configuration == null) { configuration = new PackageExportConfiguration($"Configuration{Configurations.Count + 1}") { ParentStorage = this }; }
+
+            Configurations.Add(configuration);
+
+            return configuration;
         }
     }
 }
