@@ -71,6 +71,11 @@ namespace Varneon.PackageExporter
         [HideInInspector]
         public bool ExpandInInspector = true;
 
+        /// <summary>
+        /// Parent configuration storage that this configuration is attached to
+        /// </summary>
+        public PackageExporterConfigurationStorage ParentStorage;
+
         public enum DependencyOptions
         {
             None,

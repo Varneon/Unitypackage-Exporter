@@ -21,10 +21,12 @@ namespace Varneon.PackageExporter
         [SerializeField]
         private VisualTreeAsset mainWindowUxml, noConfigurationsFileUxml, noConfigurationsUxml;
 
+        private PackageExporterConfigurationStorage[] packageExporterConfigurationStorages;
+
         /// <summary>
-        /// The scriptable object for storing all package export configurations
+        /// List of all available export configurations in the project
         /// </summary>
-        private PackageExporterConfigurationStorage packageConfigurations;
+        private List<PackageExportConfiguration> packageExportConfigurations;
 
         /// <summary>
         /// The active package export configuration
@@ -301,7 +303,7 @@ namespace Varneon.PackageExporter
 
             LoadPage(Page.Main);
 
-            LoadPackageConfigurationsFile();
+            LoadPackageConfigurationStorages();
         }
 
         private void OnDestroy()
@@ -323,14 +325,9 @@ namespace Varneon.PackageExporter
         {
             if (isWindowFocused) { return; }
 
-            if (noConfigurationFileAvailable)
+            if (noConfigurationFileAvailable || noConfigurationsAvailable)
             {
-                return;
-            }
-
-            if (noConfigurationsAvailable)
-            {
-                LoadPackageConfigurations();
+                LoadPackageConfigurationStorages(false);
 
                 return;
             }
@@ -409,7 +406,7 @@ namespace Varneon.PackageExporter
                     return;
                 case Page.NoConfigurationsFile:
                     noConfigurationsFileUxml.CloneTree(rootVisualElement);
-                    rootVisualElement.Q<Button>("Button_CreateConfigurationsFile").clicked += () => LoadPackageConfigurationsFile();
+                    rootVisualElement.Q<Button>("Button_CreateConfigurationsFile").clicked += () => LoadPackageConfigurationStorages();
                     return;
                 case Page.NoConfigurations:
                     noConfigurationsUxml.CloneTree(rootVisualElement);
@@ -423,17 +420,17 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void SelectPackageConfigurationsFile()
         {
-            Selection.SetActiveObjectWithContext(packageConfigurations, this);
+            Selection.SetActiveObjectWithContext(activeConfiguration?.ParentStorage ?? packageExporterConfigurationStorages?[0], this);
         }
 
         /// <summary>
         /// Loads the package configurations scriptable object
         /// </summary>
-        private void LoadPackageConfigurationsFile()
+        private void LoadPackageConfigurationStorages(bool createNewIfNoneFound = true)
         {
-            packageConfigurations = PackageExporterConfigurationStorage.Load();
+            packageExporterConfigurationStorages = PackageExporterConfigurationStorage.LoadAllConfigurationStorages(createNewIfNoneFound);
 
-            if (packageConfigurations == null)
+            if (packageExporterConfigurationStorages == null || packageExporterConfigurationStorages.Length == 0)
             {
                 noConfigurationFileAvailable = true;
 
@@ -441,6 +438,22 @@ namespace Varneon.PackageExporter
 
                 return;
             }
+
+            // After allowing multiple storages in a project, reference to the storage that the configuration is stored in is required
+            foreach(PackageExporterConfigurationStorage storage in packageExporterConfigurationStorages)
+            {
+                foreach(PackageExportConfiguration configuration in storage.Configurations)
+                {
+                    if(configuration.ParentStorage == null)
+                    {
+                        configuration.ParentStorage = storage;
+
+                        EditorUtility.SetDirty(storage);
+                    }
+                }
+            }
+
+            packageExportConfigurations = new List<PackageExportConfiguration>(packageExporterConfigurationStorages.SelectMany(s => s.Configurations));
 
             noConfigurationFileAvailable = false;
 
@@ -452,7 +465,7 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void LoadPackageConfigurations()
         {
-            if (packageConfigurations.Configurations.Count == 0)
+            if (packageExportConfigurations.Count == 0)
             {
                 noConfigurationsAvailable = true;
 
@@ -484,7 +497,7 @@ namespace Varneon.PackageExporter
 
             activeConfigurationIndex = Array.IndexOf(packageConfigurationNames, name);
 
-            activeConfiguration = packageConfigurations.Configurations[activeConfigurationIndex];
+            activeConfiguration = packageExportConfigurations[activeConfigurationIndex];
 
             lastPackageVersion = packageVersion = activeConfiguration.GetCurrentVersion();
 
@@ -719,7 +732,7 @@ namespace Varneon.PackageExporter
         /// <returns></returns>
         private string[] GetAvailablePackageConfigurationNames()
         {
-            return packageConfigurations.Configurations.Select(c => c.Name).ToArray();
+            return packageExportConfigurations.Select(c => c.Name).ToArray();
         }
 
         /// <summary>

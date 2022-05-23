@@ -208,7 +208,7 @@ namespace Varneon.PackageExporter
 
         private void AddConfiguration()
         {
-            PackageExportConfiguration configuration = new PackageExportConfiguration($"Configuration{configurations.Configurations.Count + 1}");
+            PackageExportConfiguration configuration = new PackageExportConfiguration($"Configuration{configurations.Configurations.Count + 1}") { ParentStorage = configurations };
 
             configurations.Configurations.Add(configuration);
 
