@@ -13,7 +13,7 @@
         </ui:VisualElement>
         <ui:VisualElement class="fieldContainer">
             <ui:TextField picking-mode="Ignore" label="File Name Template" value="filler text" text="&lt;NameTemplate&gt;" name="TextField_NameTemplate" tooltip="{n} = Configuration Name, {v} = Version" class="textField" style="margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; position: absolute; left: 0; top: 0; right: 24px; bottom: 0;" />
-            <ui:Button name="Button_ResetNameTemplate" class="button browseButton" style="width: 19px; background-image: resource(&apos;Icons/Icon_Reload&apos;);" />
+            <ui:Button name="Button_ResetNameTemplate" class="button resetButton" style="width: 19px; background-image: resource(&apos;Icons/Icon_Reload&apos;);" />
         </ui:VisualElement>
         <ui:VisualElement name="InvalidNameTemplateNotifcation" style="padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; border-left-color: rgb(196, 196, 196); border-right-color: rgb(196, 196, 196); border-top-color: rgb(196, 196, 196); border-bottom-color: rgb(196, 196, 196); background-color: rgb(89, 0, 0); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; margin-top: 5px; display: none;">
             <ui:Label text="File name template is invalid!" />

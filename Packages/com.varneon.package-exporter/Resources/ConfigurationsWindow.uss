@@ -26,6 +26,18 @@
     top: 0;
 }
 
+.button.resetButton {
+    margin-left: 5px;
+    width: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.button.removeButton {
+    background-image: resource('Icons/Icon_Remove');
+}
+
 .fieldContainer {
     margin-left: 3px;
     margin-right: 3px;
@@ -34,10 +46,6 @@
     flex-direction: row;
     justify-content: space-between;
     height: 19px;
-}
-
-.button.removeButton {
-    background-image: resource('Icons/Icon_Remove');
 }
 
 .textField {
