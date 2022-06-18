@@ -291,7 +291,7 @@ namespace Varneon.PackageExporter
         }
 
         #region Editor Window Methods
-        [MenuItem("Varneon/Package Exporter")]
+        [MenuItem("Varneon/Package Exporter/Exporter")]
         private static void OpenWindow()
         {
             ExporterWindow window = GetWindow<ExporterWindow>();

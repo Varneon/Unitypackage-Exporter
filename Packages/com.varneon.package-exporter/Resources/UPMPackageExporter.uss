@@ -1,0 +1,58 @@
+.defaultMargin {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 1px;
+}
+
+#Button_Generate {
+    background-color: rgb(42, 42, 42);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#Button_Generate:hover {
+    background-color: rgb(64, 117, 128);
+}
+
+.folderFoldout {
+    color: rgb(128, 128, 128);
+    -unity-font-style: bold;
+}
+
+.assetLabel {
+    margin-left: 20px;
+    -unity-font-style: normal;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#Button_NamingHelpURL {
+    color: rgba(82, 143, 204, 255);
+    -unity-font-style: bold;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#Button_NamingHelpURL:hover {
+    color: rgb(102, 178, 255);
+}
