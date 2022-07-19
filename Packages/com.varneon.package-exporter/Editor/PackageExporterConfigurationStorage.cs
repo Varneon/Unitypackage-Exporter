@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Varneon.PackageExporter
 
         public static PackageExporterConfigurationStorage[] LoadAllConfigurationStorages(bool createNewIfNoneFound = true)
         {
-            PackageExporterConfigurationStorage[] storages = Resources.FindObjectsOfTypeAll<PackageExporterConfigurationStorage>();
+            PackageExporterConfigurationStorage[] storages = AssetDatabase.FindAssets("t:PackageExporterConfigurationStorage").Select(a => AssetDatabase.LoadAssetAtPath<PackageExporterConfigurationStorage>(AssetDatabase.GUIDToAssetPath(a))).ToArray();
 
             if (storages.Length == 0 && createNewIfNoneFound)
             {
