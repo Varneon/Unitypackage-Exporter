@@ -359,6 +359,8 @@ namespace Varneon.PackageExporter
 
             rootVisualElement.Q<Button>("Button_ReloadConfiguration").clicked += () => SetActiveConfiguration(activeConfiguration.Name);
 
+            rootVisualElement.Q<Button>("Button_UPMVersionHelp").clicked += () => Application.OpenURL("https://docs.unity3d.com/Manual/upm-semver.html");
+
             packageVersionField = rootVisualElement.Q<TextField>("TextField_Version");
 
             packageVersionField.RegisterValueChangedCallback(a => { IsPackageVersionValid = Version.TryParse(PackageVersion = a.newValue, out _); });
