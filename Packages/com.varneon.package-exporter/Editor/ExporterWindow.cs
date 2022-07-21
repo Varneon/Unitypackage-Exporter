@@ -203,6 +203,11 @@ namespace Varneon.PackageExporter
         private TextField packageVersionField;
 
         /// <summary>
+        /// TextField for providing custom package version (non-SemVer)
+        /// </summary>
+        private TextField packageCustomVersionField;
+
+        /// <summary>
         /// TextField for previewing and modifying the final package name
         /// </summary>
         private TextField packageNameField;
@@ -365,6 +370,10 @@ namespace Varneon.PackageExporter
 
             packageVersionField.RegisterValueChangedCallback(a => { IsPackageVersionValid = Version.TryParse(PackageVersion = a.newValue, out _); });
 
+            packageCustomVersionField = rootVisualElement.Q<TextField>("TextField_CustomVersion");
+
+            packageCustomVersionField.RegisterValueChangedCallback(a => PackageVersion = a.newValue);
+
             lastVersionIndicator = rootVisualElement.Q<VisualElement>("LastVersionIndicator");
 
             lastVersionLabel = lastVersionIndicator.Q<Label>("Label_LastVersion");
@@ -504,9 +513,22 @@ namespace Varneon.PackageExporter
 
             activeConfiguration = packageExportConfigurations[activeConfigurationIndex];
 
+            // If SemVer is enforced, use the standard version field
+            packageVersionField.parent.style.display = activeConfiguration.EnforceSemVer ? DisplayStyle.Flex : DisplayStyle.None;
+
+            // If SemVer is not enforced, use a custom version field without restrictions
+            packageCustomVersionField.style.display = activeConfiguration.EnforceSemVer ? DisplayStyle.None : DisplayStyle.Flex;
+
             lastPackageVersion = packageVersion = activeConfiguration.GetCurrentVersion();
 
-            packageVersionField.value = packageVersion;
+            if (activeConfiguration.EnforceSemVer)
+            {
+                packageVersionField.value = packageVersion;
+            }
+            else
+            {
+                packageCustomVersionField.value = packageVersion;
+            }
 
             lastVersionLabel.text = lastPackageVersion;
 

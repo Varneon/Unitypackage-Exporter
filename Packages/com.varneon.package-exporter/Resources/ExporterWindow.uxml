@@ -8,7 +8,10 @@
         <uie:ToolbarButton name="Button_ReloadConfiguration" tooltip="Reload Configuration" style="background-image: resource(&apos;Icons/Icon_Reload&apos;); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-shrink: 0; -unity-background-image-tint-color: rgb(204, 204, 204); width: 20px; height: 20px;" />
         <uie:ToolbarButton name="Button_OpenConfigurations" tooltip="Open Configurations" style="background-image: resource(&apos;Icons/Icon_Gear&apos;); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-shrink: 0; width: 20px; height: 20px; -unity-background-image-tint-color: rgb(204, 204, 204);" />
     </uie:Toolbar>
-    <ui:VisualElement name="VersionFieldRoot" style="flex-direction: row;">
+    <ui:TextField picking-mode="Ignore" label="Custom Version:" name="TextField_CustomVersion" tooltip="Custom version of the package" class="defaultMargin" style="display: none;">
+        <Style src="ExporterWindow.uss" />
+    </ui:TextField>
+    <ui:VisualElement name="VersionFieldRoot" style="flex-direction: row; display: flex;">
         <Style src="ExporterWindow.uss" />
         <ui:TextField picking-mode="Ignore" label="Version:" name="TextField_Version" tooltip="Version of the package (e.g. &quot;1.2.3&quot;, &lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;)" class="defaultMargin" style="flex-grow: 1;" />
         <ui:Button name="Button_UPMVersionHelp" tooltip="https://docs.unity3d.com/Manual/upm-semver.html" style="height: 18px; margin-left: 0; margin-right: 5px; margin-top: 5px; margin-bottom: 0; background-image: resource(&apos;Icons/Icon_QuestionMark&apos;); width: 18px; -unity-background-image-tint-color: rgb(204, 204, 204); display: flex;" />

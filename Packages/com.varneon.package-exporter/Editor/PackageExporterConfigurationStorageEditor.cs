@@ -134,13 +134,33 @@ namespace Varneon.PackageExporter
 
             ObjectField versionField = container.Q<ObjectField>("ObjectField_VersionFile");
             versionField.objectType = typeof(TextAsset);
-            versionField.RegisterValueChangedCallback(a => configuration.VersionFile = a.newValue as TextAsset);
+            versionField.RegisterValueChangedCallback(a =>
+            {
+                configuration.VersionFile = a.newValue as TextAsset;
+                MarkConfigurationsDirty();
+            });
             versionField.SetValueWithoutNotify(configuration.VersionFile);
 
             ObjectField manifestField = container.Q<ObjectField>("ObjectField_PackageManifest");
             manifestField.objectType = typeof(UnityEditorInternal.PackageManifest);
-            manifestField.RegisterValueChangedCallback(a => configuration.PackageManifest = a.newValue as UnityEditorInternal.PackageManifest);
+            manifestField.RegisterValueChangedCallback(a =>
+            {
+                configuration.PackageManifest = a.newValue as UnityEditorInternal.PackageManifest;
+                MarkConfigurationsDirty();
+            });
             manifestField.SetValueWithoutNotify(configuration.PackageManifest);
+
+            Toggle enforceSemVerToggle = container.Q<Toggle>("Toggle_EnforceSemVer");
+            enforceSemVerToggle.RegisterValueChangedCallback(a =>
+            {
+                configuration.EnforceSemVer = a.newValue;
+                manifestField.style.display = a.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+                MarkConfigurationsDirty();
+            });
+            enforceSemVerToggle.SetValueWithoutNotify(configuration.EnforceSemVer);
+            manifestField.style.display = configuration.EnforceSemVer ? DisplayStyle.Flex : DisplayStyle.None;
+
+            container.Q<Button>("Button_UPMVersionHelp").clicked += () => Application.OpenURL("https://docs.unity3d.com/Manual/upm-semver.html");
 
             container.Q<Button>("Button_RemoveConfiguration").clicked += () => {
                 if(EditorUtility.DisplayDialog("Remove export configuration?", $"Are you sure you want to remove the following package export configuration:\n\n{configuration.Name}", "Yes", "No"))

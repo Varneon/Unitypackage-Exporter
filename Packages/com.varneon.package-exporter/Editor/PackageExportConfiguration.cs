@@ -31,6 +31,11 @@ namespace Varneon.PackageExporter
         public string FileNameTemplate = "{n}_v{v}";
 
         /// <summary>
+        /// Should SemVer be enforced for package versioning
+        /// </summary>
+        public bool EnforceSemVer = true;
+
+        /// <summary>
         /// [UPM Package Only] Package Manifest of the UPM package (package.json)
         /// </summary>
         public PackageManifest PackageManifest;
@@ -94,30 +99,49 @@ namespace Varneon.PackageExporter
         /// <returns>Version string</returns>
         public string GetCurrentVersion()
         {
-            Version manifestVersion = new Version();
-
-            string manifestPath = GetManifestPath();
-
-            if (!string.IsNullOrEmpty(manifestPath))
+            if (EnforceSemVer)
             {
-                PackageInfo info = PackageInfo.FindForAssetPath(manifestPath);
+                Version manifestVersion = new Version();
 
-                manifestVersion = new Version(info?.version);
-            }
+                string manifestPath = GetManifestPath();
 
-            Version fileVersion = new Version();
-
-            string versionPath = GetVersionPath();
-
-            if (!string.IsNullOrEmpty(versionPath))
-            {
-                using (StreamReader reader = new StreamReader(versionPath))
+                if (!string.IsNullOrEmpty(manifestPath))
                 {
-                    fileVersion = new Version(reader.ReadToEnd().ToLower().Trim('v'));
-                }
-            }
+                    PackageInfo info = PackageInfo.FindForAssetPath(manifestPath);
 
-            return ((manifestVersion >= fileVersion) ? manifestVersion : fileVersion).ToString();
+                    manifestVersion = new Version(info?.version);
+                }
+
+                Version fileVersion = new Version();
+
+                string versionPath = GetVersionPath();
+
+                if (!string.IsNullOrEmpty(versionPath))
+                {
+                    using (StreamReader reader = new StreamReader(versionPath))
+                    {
+                        fileVersion = new Version(reader.ReadToEnd().ToLower().Trim('v'));
+                    }
+                }
+
+                return ((manifestVersion >= fileVersion) ? manifestVersion : fileVersion).ToString();
+            }
+            else
+            {
+                string fileVersion = string.Empty;
+
+                string versionPath = GetVersionPath();
+
+                if (!string.IsNullOrEmpty(versionPath))
+                {
+                    using (StreamReader reader = new StreamReader(versionPath))
+                    {
+                        fileVersion = reader.ReadToEnd();
+                    }
+                }
+
+                return fileVersion;
+            }
         }
 
         /// <summary>
@@ -126,7 +150,7 @@ namespace Varneon.PackageExporter
         /// <returns>File path to the package manifest if it's valid</returns>
         public string GetManifestPath()
         {
-            if(PackageManifest != null)
+            if(EnforceSemVer && PackageManifest != null)
             {
                 return AssetDatabase.GetAssetPath(PackageManifest);
             }
