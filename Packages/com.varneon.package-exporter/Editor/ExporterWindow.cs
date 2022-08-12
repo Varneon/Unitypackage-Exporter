@@ -22,9 +22,14 @@ namespace Varneon.PackageExporter
         private VisualTreeAsset mainWindowUxml, noConfigurationsFileUxml, noConfigurationsUxml;
 
         /// <summary>
-        /// The scriptable object for storing all package export configurations
+        /// All available configuration storages in the project
         /// </summary>
-        private PackageExporterConfigurations packageConfigurations;
+        private PackageExporterConfigurationStorage[] packageExporterConfigurationStorages;
+
+        /// <summary>
+        /// List of all available export configurations in the project
+        /// </summary>
+        private List<PackageExportConfiguration> packageExportConfigurations;
 
         /// <summary>
         /// The active package export configuration
@@ -86,16 +91,40 @@ namespace Varneon.PackageExporter
                     isPackageVersionValid = value;
 
                     invalidVersionNotification.style.display = value ? DisplayStyle.None : DisplayStyle.Flex;
-
-                    exportButton.SetEnabled(value);
                 }
+
+                exportButton.SetEnabled(value && isFileNameValid);
             }
+            get => isPackageVersionValid;
         }
 
         /// <summary>
         /// Name of the unitypackage to be exported
         /// </summary>
         private string fileName;
+
+        /// <summary>
+        /// Name of the unitypackage to be exported
+        /// </summary>
+        private string FileName
+        {
+            set
+            {
+                isFileNameValid = PackageFileNameUtility.IsNameValid(value);
+
+                invalidFileNameNotification.style.display = isFileNameValid ? DisplayStyle.None : DisplayStyle.Flex;
+
+                exportButton.SetEnabled(isFileNameValid && IsPackageVersionValid);
+
+                fileName = value;
+            }
+            get => fileName;
+        }
+
+        /// <summary>
+        /// Is the current package file name valid
+        /// </summary>
+        private bool isFileNameValid;
 
         /// <summary>
         /// Has the user modified the name
@@ -179,6 +208,11 @@ namespace Varneon.PackageExporter
         private TextField packageNameField;
 
         /// <summary>
+        /// Notification for indicating that the file name of the package is invalid
+        /// </summary>
+        private VisualElement invalidFileNameNotification;
+
+        /// <summary>
         /// Button for resetting the package name to origican naming pattern
         /// </summary>
         private Button resetPackageNameButton;
@@ -257,7 +291,7 @@ namespace Varneon.PackageExporter
         }
 
         #region Editor Window Methods
-        [MenuItem("Varneon/Package Exporter")]
+        [MenuItem("Varneon/Package Exporter/Exporter")]
         private static void OpenWindow()
         {
             ExporterWindow window = GetWindow<ExporterWindow>();
@@ -272,7 +306,7 @@ namespace Varneon.PackageExporter
 
             LoadPage(Page.Main);
 
-            LoadPackageConfigurationsFile();
+            LoadPackageConfigurationStorages();
         }
 
         private void OnDestroy()
@@ -294,14 +328,9 @@ namespace Varneon.PackageExporter
         {
             if (isWindowFocused) { return; }
 
-            if (noConfigurationFileAvailable)
+            if (noConfigurationFileAvailable || noConfigurationsAvailable)
             {
-                return;
-            }
-
-            if (noConfigurationsAvailable)
-            {
-                LoadPackageConfigurations();
+                LoadPackageConfigurationStorages(false);
 
                 return;
             }
@@ -330,6 +359,8 @@ namespace Varneon.PackageExporter
 
             rootVisualElement.Q<Button>("Button_ReloadConfiguration").clicked += () => SetActiveConfiguration(activeConfiguration.Name);
 
+            rootVisualElement.Q<Button>("Button_UPMVersionHelp").clicked += () => Application.OpenURL("https://docs.unity3d.com/Manual/upm-semver.html");
+
             packageVersionField = rootVisualElement.Q<TextField>("TextField_Version");
 
             packageVersionField.RegisterValueChangedCallback(a => { IsPackageVersionValid = Version.TryParse(PackageVersion = a.newValue, out _); });
@@ -340,7 +371,9 @@ namespace Varneon.PackageExporter
 
             packageNameField = rootVisualElement.Q<TextField>("TextField_PackageName");
 
-            packageNameField.RegisterValueChangedCallback(a => { fileName = a.newValue; IsPackageNameDirty = true; });
+            packageNameField.RegisterValueChangedCallback(a => { FileName = a.newValue; IsPackageNameDirty = true; });
+
+            invalidFileNameNotification = rootVisualElement.Q<VisualElement>("Notification_InvalidFileName");
 
             resetPackageNameButton = rootVisualElement.Q<Button>("Button_ResetPackageName");
 
@@ -378,7 +411,7 @@ namespace Varneon.PackageExporter
                     return;
                 case Page.NoConfigurationsFile:
                     noConfigurationsFileUxml.CloneTree(rootVisualElement);
-                    rootVisualElement.Q<Button>("Button_CreateConfigurationsFile").clicked += () => LoadPackageConfigurationsFile();
+                    rootVisualElement.Q<Button>("Button_CreateConfigurationsFile").clicked += () => LoadPackageConfigurationStorages();
                     return;
                 case Page.NoConfigurations:
                     noConfigurationsUxml.CloneTree(rootVisualElement);
@@ -392,17 +425,17 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void SelectPackageConfigurationsFile()
         {
-            Selection.SetActiveObjectWithContext(packageConfigurations, this);
+            Selection.SetActiveObjectWithContext(activeConfiguration?.ParentStorage ?? packageExporterConfigurationStorages?[0], this);
         }
 
         /// <summary>
         /// Loads the package configurations scriptable object
         /// </summary>
-        private void LoadPackageConfigurationsFile()
+        private void LoadPackageConfigurationStorages(bool createNewIfNoneFound = true)
         {
-            packageConfigurations = PackageExporterConfigurations.Load();
+            packageExporterConfigurationStorages = PackageExporterConfigurationStorage.LoadAllConfigurationStorages(createNewIfNoneFound);
 
-            if (packageConfigurations == null)
+            if (packageExporterConfigurationStorages == null || packageExporterConfigurationStorages.Length == 0)
             {
                 noConfigurationFileAvailable = true;
 
@@ -410,6 +443,22 @@ namespace Varneon.PackageExporter
 
                 return;
             }
+
+            // After allowing multiple storages in a project, reference to the storage that the configuration is stored in is required
+            foreach(PackageExporterConfigurationStorage storage in packageExporterConfigurationStorages)
+            {
+                foreach(PackageExportConfiguration configuration in storage.Configurations)
+                {
+                    if(configuration.ParentStorage == null)
+                    {
+                        configuration.ParentStorage = storage;
+
+                        EditorUtility.SetDirty(storage);
+                    }
+                }
+            }
+
+            packageExportConfigurations = new List<PackageExportConfiguration>(packageExporterConfigurationStorages.SelectMany(s => s.Configurations));
 
             noConfigurationFileAvailable = false;
 
@@ -421,7 +470,7 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void LoadPackageConfigurations()
         {
-            if (packageConfigurations.Configurations.Count == 0)
+            if (packageExportConfigurations.Count == 0)
             {
                 noConfigurationsAvailable = true;
 
@@ -453,7 +502,7 @@ namespace Varneon.PackageExporter
 
             activeConfigurationIndex = Array.IndexOf(packageConfigurationNames, name);
 
-            activeConfiguration = packageConfigurations.Configurations[activeConfigurationIndex];
+            activeConfiguration = packageExportConfigurations[activeConfigurationIndex];
 
             lastPackageVersion = packageVersion = activeConfiguration.GetCurrentVersion();
 
@@ -688,7 +737,7 @@ namespace Varneon.PackageExporter
         /// <returns></returns>
         private string[] GetAvailablePackageConfigurationNames()
         {
-            return packageConfigurations.Configurations.Select(c => c.Name).ToArray();
+            return packageExportConfigurations.Select(c => c.Name).ToArray();
         }
 
         /// <summary>
@@ -696,9 +745,9 @@ namespace Varneon.PackageExporter
         /// </summary>
         private void UpdateOutputFileName()
         {
-            fileName = $"{activeConfiguration.Name}_v{PackageVersion}";
+            FileName = activeConfiguration.GenerateFileName(packageVersion);
 
-            packageNameField.SetValueWithoutNotify(fileName);
+            packageNameField.SetValueWithoutNotify(FileName);
 
             IsPackageNameDirty = false;
         }
@@ -783,7 +832,7 @@ namespace Varneon.PackageExporter
                 AssetDatabase.Refresh();
             }
 
-            AssetDatabase.ExportPackage(pathsToExport.ToArray(), $"{Path.Combine(activeConfiguration.ExportDirectory, fileName)}.unitypackage", activeConfiguration.ShowPackageInFileBrowserAfterExport ? ExportPackageOptions.Interactive : ExportPackageOptions.Default);
+            AssetDatabase.ExportPackage(pathsToExport.ToArray(), $"{Path.Combine(activeConfiguration.ExportDirectory, FileName)}.unitypackage", activeConfiguration.ShowPackageInFileBrowserAfterExport ? ExportPackageOptions.Interactive : ExportPackageOptions.Default);
 
             if (manifestModified)
             {

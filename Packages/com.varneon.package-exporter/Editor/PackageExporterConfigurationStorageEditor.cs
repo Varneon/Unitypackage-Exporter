@@ -7,8 +7,8 @@ using System.IO;
 
 namespace Varneon.PackageExporter
 {
-    [CustomEditor(typeof(PackageExporterConfigurations))]
-    internal class PackageExporterConfigurationsEditor : Editor
+    [CustomEditor(typeof(PackageExporterConfigurationStorage))]
+    internal class PackageExporterConfigurationStorageEditor : Editor
     {
         [SerializeField]
         private VisualTreeAsset
@@ -23,13 +23,13 @@ namespace Varneon.PackageExporter
 
         private ListView configurationListView;
 
-        private PackageExporterConfigurations configurations;
+        private PackageExporterConfigurationStorage configurations;
 
         private ScrollView inspectorScrollView;
 
         private void OnEnable()
         {
-            configurations = (PackageExporterConfigurations)target;
+            configurations = (PackageExporterConfigurationStorage)target;
         }
 
         private void FindInspectorScrollView()
@@ -60,6 +60,12 @@ namespace Varneon.PackageExporter
             mainWindowUxml.CloneTree(rootVisualElement);
 
             rootVisualElement.Q<Button>("Button_AddConfiguration").clicked += () => AddConfiguration();
+
+            rootVisualElement.Q<Button>("Button_Actions").clicked += () => {
+                GenericMenu menu = new GenericMenu();
+                menu.AddItem(new GUIContent("Create New UPM Package"), false, () => Utilities.UPMPackageGenerator.OpenWindow());
+                menu.ShowAsContext();
+            };
 
             configurationListView = rootVisualElement.Q<ListView>("ListView_Configurations");
 
@@ -113,6 +119,18 @@ namespace Varneon.PackageExporter
                     exportDirectoryTextField.value = directory;
                 }
             };
+
+            VisualElement invalidFileNameTemplateNotifcation = container.Q<VisualElement>("InvalidNameTemplateNotifcation");
+
+            TextField fileNameTemplateTextField = container.Q<TextField>("TextField_NameTemplate");
+            fileNameTemplateTextField.value = configuration.FileNameTemplate;
+            fileNameTemplateTextField.RegisterValueChangedCallback(a => {
+                configuration.FileNameTemplate = a.newValue;
+                invalidFileNameTemplateNotifcation.style.display = configuration.IsFileNameTemplateValid() ? DisplayStyle.None : DisplayStyle.Flex;
+                MarkConfigurationsDirty();
+            });
+
+            container.Q<Button>("Button_ResetNameTemplate").clicked += () => fileNameTemplateTextField.value = "{n}_v{v}";
 
             ObjectField versionField = container.Q<ObjectField>("ObjectField_VersionFile");
             versionField.objectType = typeof(TextAsset);
@@ -196,9 +214,7 @@ namespace Varneon.PackageExporter
 
         private void AddConfiguration()
         {
-            PackageExportConfiguration configuration = new PackageExportConfiguration($"Configuration{configurations.Configurations.Count + 1}");
-
-            configurations.Configurations.Add(configuration);
+            PackageExportConfiguration configuration = configurations.AddConfiguration();
 
             AddConfigurationBlock(configuration);
 

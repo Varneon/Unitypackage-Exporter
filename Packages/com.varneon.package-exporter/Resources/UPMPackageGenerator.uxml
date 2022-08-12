@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Label text="UPM Package Generator" style="background-color: rgb(41, 41, 41); font-size: 20px; -unity-text-align: middle-center; height: 32px;">
+        <Style src="UPMPackageExporter.uss" />
+    </ui:Label>
+    <ui:TextField picking-mode="Ignore" label="Name:" name="TextField_PackageName" tooltip="Official name of the package (&lt;domain-name-extension&gt;.&lt;company-name&gt;.&lt;package-name&gt;) e.g. &quot;com.varneon.package-exporter&quot;" binding-path="PackageName" max-length="214" class="defaultMargin">
+        <Style src="UPMPackageExporter.uss" />
+    </ui:TextField>
+    <ui:Toggle label="Add Version File:" name="Toggle_AddVersionFile" binding-path="AddVersionFile" tooltip="Should a version.txt file be automatically created for this package" class="defaultMargin">
+        <Style src="UPMPackageExporter.uss" />
+    </ui:Toggle>
+    <ui:Button text="https://docs.unity3d.com/Manual/cus-naming.html" name="Button_NamingHelpURL" class="defaultMargin">
+        <Style src="UPMPackageExporter.uss" />
+    </ui:Button>
+    <ui:Button text="Generate Package" name="Button_Generate" tooltip="Generate the UPM package" class="defaultMargin" style="height: 24px; margin-bottom: 5px; position: absolute; bottom: 0; right: 0; left: 0;">
+        <Style src="UPMPackageExporter.uss" />
+    </ui:Button>
+</ui:UXML>

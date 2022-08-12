@@ -5,7 +5,6 @@ using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.UIElements;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace Varneon.PackageExporter
@@ -25,6 +24,11 @@ namespace Varneon.PackageExporter
         /// Directory where the package will be exported
         /// </summary>
         public string ExportDirectory = "Assets";
+
+        /// <summary>
+        /// Template for the exported package name
+        /// </summary>
+        public string FileNameTemplate = "{n}_v{v}";
 
         /// <summary>
         /// [UPM Package Only] Package Manifest of the UPM package (package.json)
@@ -67,87 +71,16 @@ namespace Varneon.PackageExporter
         [HideInInspector]
         public bool ExpandInInspector = true;
 
-        private const string LogPrefix = "[<color=#00AACC>PackageExporter</color>]:";
+        /// <summary>
+        /// Parent configuration storage that this configuration is attached to
+        /// </summary>
+        public PackageExporterConfigurationStorage ParentStorage;
 
         public enum DependencyOptions
         {
             None,
             Direct,
             Recursive
-        }
-
-        /// <summary>
-        /// Path inclusion definition
-        /// </summary>
-        [Serializable]
-        public class PathInclusion
-        {
-            /// <summary>
-            /// Path to an asset or folder
-            /// </summary>
-            public string Path;
-
-            /// <summary>
-            /// If the Path is a folder, should the files in the subfolders be included in the definition. Will be ignored if Path is an asset
-            /// </summary>
-            public bool IncludeSubfolders;
-
-            public PathInclusion(string path = "Assets", bool includeSubfolders = true)
-            {
-                Path = path;
-                IncludeSubfolders = includeSubfolders;
-            }
-
-            public void BindConfigurationBlockElement(VisualElement block, Action markConfigurationsDirtyAction)
-            {
-                Label foldoutLabel = block.Q<Foldout>("Foldout_Data").Q<Toggle>().Q<Label>();
-                foldoutLabel.text = Path;
-
-                TextField pathTextField = block.Q<TextField>("TextField_Path");
-                pathTextField.RegisterValueChangedCallback(a => {
-                    Path = a.newValue;
-                    foldoutLabel.text = a.newValue;
-                    markConfigurationsDirtyAction.Invoke();
-                });
-
-                pathTextField.SetValueWithoutNotify(Path);
-
-                Toggle includeSubfoldersToggle = block.Q<Toggle>("Toggle_IncludeSubfolders");
-                includeSubfoldersToggle.RegisterValueChangedCallback(a => {
-                    IncludeSubfolders = a.newValue;
-                    markConfigurationsDirtyAction.Invoke();
-                });
-
-                includeSubfoldersToggle.SetValueWithoutNotify(IncludeSubfolders);
-            }
-        }
-
-        /// <summary>
-        /// Path exclusion definition
-        /// </summary>
-        [Serializable]
-        public class PathExclusion
-        {
-            /// <summary>
-            /// Path to the asset or folder
-            /// </summary>
-            public string Path;
-
-            public PathExclusion(string path = "Assets")
-            {
-                Path = path;
-            }
-
-            public void BindConfigurationBlockElement(VisualElement block, Action markConfigurationsDirtyAction)
-            {
-                TextField pathTextField = block.Q<TextField>("TextField_Path");
-                pathTextField.RegisterValueChangedCallback(a => {
-                    Path = a.newValue;
-                    markConfigurationsDirtyAction.Invoke();
-                });
-
-                pathTextField.SetValueWithoutNotify(Path);
-            }
         }
 
         public PackageExportConfiguration(string name)
@@ -213,6 +146,16 @@ namespace Varneon.PackageExporter
             }
 
             return string.Empty;
+        }
+
+        public string GenerateFileName(string versionString)
+        {
+            return PackageFileNameUtility.GenerateName(this, versionString);
+        }
+
+        public bool IsFileNameTemplateValid()
+        {
+            return PackageFileNameUtility.IsNameValid(FileNameTemplate);
         }
     }
 }
