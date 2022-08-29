@@ -1,5 +1,5 @@
 {
-    "name": "Varneon.PackageExporter",
+    "name": "Varneon.PackageExporter.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"
