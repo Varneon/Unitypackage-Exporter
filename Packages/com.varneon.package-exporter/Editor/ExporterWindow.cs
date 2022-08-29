@@ -1,12 +1,11 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
-using System.Collections.Generic;
 
 namespace Varneon.PackageExporter
 {
@@ -352,6 +351,15 @@ namespace Varneon.PackageExporter
             mainWindowUxml.CloneTree(rootVisualElement);
 
             configurationMenu = rootVisualElement.Q<ToolbarMenu>("ConfigurationMenu");
+
+            configurationMenu.RegisterCallback<ContextClickEvent>(a =>
+            {
+                GenericMenu menu = new GenericMenu();
+
+                menu.AddItem(new GUIContent("Open Export Directory"), false, () => EditorUtility.RevealInFinder(activeConfiguration.ExportDirectory));
+
+                menu.ShowAsContext();
+            });
 
             configurationDropdown = configurationMenu.menu;
 
