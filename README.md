@@ -10,6 +10,8 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 * Pre-configured package export configurations for exporting consistently versioned and managed unitypackages
 * Automatically managed UPM package manifest versions and version files
 
+> Want to speed up the creation of new UPM packages? Try my [UPM Package Generator](https://github.com/Varneon/UPM-Package-Generator)!
+
 |Configuration Editor|Exporter Window|
 :-:|:-:
 |Create and edit package export configurations using the configuration editor|Modify the version and the name of the package and preview contents of the package|
