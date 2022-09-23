@@ -7,5 +7,12 @@
   "author": {
     "name": "Varneon",
     "url": "https://github.com/Varneon"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Self-Export Configuration",
+      "description": "Export configuration for exporting Unitypackage Exporter",
+      "path": "Samples~/Self-Export Configuration"
+    }
+  ]
 }
