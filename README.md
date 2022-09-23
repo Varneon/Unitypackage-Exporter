@@ -5,7 +5,6 @@
 </div>
 
 Unity Editor extension for exporting consistent revisions of unitypackages with custom configurations
----
 
 ## Existing Features
 * Pre-configured package export configurations for exporting consistently versioned and managed unitypackages
