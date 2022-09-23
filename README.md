@@ -10,9 +10,6 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 * Pre-configured package export configurations for exporting consistently versioned and managed unitypackages
 * Automatically managed UPM package manifest versions and version files
 
-## Features In Development
-* Custom package name templates
-
 |Configuration Editor|Exporter Window|
 :-:|:-:
 |Create and edit package export configurations using the configuration editor|Modify the version and the name of the package and preview contents of the package|
