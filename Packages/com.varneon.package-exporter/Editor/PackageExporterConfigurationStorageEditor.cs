@@ -61,12 +61,6 @@ namespace Varneon.PackageExporter
 
             rootVisualElement.Q<Button>("Button_AddConfiguration").clicked += () => AddConfiguration();
 
-            rootVisualElement.Q<Button>("Button_Actions").clicked += () => {
-                GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Create New UPM Package"), false, () => Utilities.UPMPackageGenerator.OpenWindow());
-                menu.ShowAsContext();
-            };
-
             configurationListView = rootVisualElement.Q<ListView>("ListView_Configurations");
 
             for(int i = 0; i < configurations.Configurations.Count; i++)
