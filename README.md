@@ -1,23 +1,16 @@
-# Unitypackage Exporter
-Unity Editor extension for exporting consistent revisions of unitypackages with custom configurations
----
+<div>
 
-<div align="center">
-
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Varneon/Unitypackage-Exporter?style=for-the-badge)
-[![GitHub](https://img.shields.io/github/license/Varneon/Unitypackage-Exporter?color=blue&style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/blob/main/LICENSE)
-[![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/Unitypackage-Exporter?style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/stargazers)
-[![GitHub all releases](https://img.shields.io/github/downloads/Varneon/Unitypackage-Exporter/total?color=blue&style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/releases)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/Unitypackage-Exporter?color=blue&label=Release&sort=semver&style=for-the-badge)](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+# Unitypackage Exporter [![GitHub](https://img.shields.io/github/license/Varneon/Unitypackage-Exporter?color=blue&label=License&style=flat)](https://github.com/Varneon/Unitypackage-Exporter/blob/main/LICENSE) [![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/Unitypackage-Exporter?style=flat&label=Stars)](https://github.com/Varneon/Unitypackage-Exporter/stargazers) [![GitHub all releases](https://img.shields.io/github/downloads/Varneon/Unitypackage-Exporter/total?color=blue&label=Downloads&style=flat)](https://github.com/Varneon/Unitypackage-Exporter/releases) [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/Unitypackage-Exporter?color=blue&label=Release&sort=semver&style=flat)](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
 
 </div>
+
+Unity Editor extension for exporting consistent revisions of unitypackages with custom configurations
 
 ## Existing Features
 * Pre-configured package export configurations for exporting consistently versioned and managed unitypackages
 * Automatically managed UPM package manifest versions and version files
 
-## Features In Development
-* Custom package name templates
+> Want to speed up the creation of new UPM packages? Try my [UPM Package Generator](https://github.com/Varneon/UPM-Package-Generator)!
 
 |Configuration Editor|Exporter Window|
 :-:|:-:
@@ -26,12 +19,41 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 
 > ## Unity version compatibility notice: This extension has so far only been tested in Unity 2019.4.31f1 (VRChat focused development), support for other versions will be added at a later date if there are errors caused by compatibility issues
 
-## Installation via Unity Package Manager (git):
-* Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
+# Installation
 
-![image](https://user-images.githubusercontent.com/26690821/168448943-c73d762e-c841-428e-a76b-a11ecdf39118.png)
+<details><summary>
 
-## Installation via Unitypackage:
-* Download latest Unitypackage Exporter from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
 
-![image](https://user-images.githubusercontent.com/26690821/168448973-435a4728-0f1c-462b-9a3c-2355dc5e8077.png)
+> 1. Download `com.varneon.package-exporter.zip` from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+> 2. Unpack the .zip somewhere
+> 3. In VRChat Creator Companion, navigate to `Settings` > `User Packages` > `Add`
+> 4. Navigate to the unpacked folder, `com.varneon.package-exporter` and click `Select Folder`
+> 5. `Package Exporter` should now be visible under `Local User Packages` in the project view in VRChat Creator Companion
+> 6. Click `Add`
+
+</details><details><summary>
+
+### Import with [Unity Package Manager (git)](https://docs.unity3d.com/2019.4/Documentation/Manual/upm-ui-giturl.html):</summary>
+
+> 1. In the Unity toolbar, select `Window` > `Package Manager` > `[+]` > `Add package from git URL...` 
+> 2. Paste the following link: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
+
+</details><details><summary>
+
+### Import from [Unitypackage](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetPackagesImport.html):</summary>
+
+> 1. Download latest `com.varneon.package-exporter.unitypackage` from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+> 2. Import the downloaded .unitypackage into your Unity project
+
+</details>
+
+<div align="center">
+
+## Developed by Varneon with :hearts:
+
+![Twitter Follow](https://img.shields.io/twitter/follow/Varneon?color=%231c9cea&label=%40Varneon&logo=Twitter&style=for-the-badge)
+![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCKTxeXy7gyaxr-YA9qGWOYg?color=%23FF0000&label=Varneon&logo=YouTube&style=for-the-badge)
+![GitHub followers](https://img.shields.io/github/followers/Varneon?color=%23303030&label=Varneon&logo=GitHub&style=for-the-badge)
+
+</div>

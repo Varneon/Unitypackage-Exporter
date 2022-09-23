@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9200ff32d5b6b4a8662912ce248828, type: 3}
+  m_Name: PackageExporter_SelfExportConfiguration
+  m_EditorClassIdentifier: 
+  Configurations:
+  - Name: PackageExporter
+    ExportDirectory: Assets
+    FileNameTemplate: '{n}_v{v}'
+    PackageManifest: {fileID: 8385607101436470782, guid: 58005686e7e69244bbcdf8450a2234e1,
+      type: 3}
+    VersionFile: {fileID: 0}
+    AssetInclusions: []
+    FolderInclusions:
+    - Folder: {fileID: 102900000, guid: 388c363fcf6ad98f030c02ea557e1ff6, type: 3}
+      IncludeSubfolders: 1
+      DependencyOptions: 0
+      Expanded: 1
+    AssetExclusions: []
+    FolderExclusions: []
+    ShowPackageInFileBrowserAfterExport: 1
+    ExpandInInspector: 1
+    ParentStorage: {fileID: 11400000}
