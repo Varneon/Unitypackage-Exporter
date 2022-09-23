@@ -20,15 +20,34 @@ Unity Editor extension for exporting consistent revisions of unitypackages with 
 
 > ## Unity version compatibility notice: This extension has so far only been tested in Unity 2019.4.31f1 (VRChat focused development), support for other versions will be added at a later date if there are errors caused by compatibility issues
 
-## Installation via Unity Package Manager (git):
-* Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and type in: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
+# Installation
 
-![image](https://user-images.githubusercontent.com/26690821/168448943-c73d762e-c841-428e-a76b-a11ecdf39118.png)
+<details><summary>
 
-## Installation via Unitypackage:
-* Download latest Unitypackage Exporter from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
 
-![image](https://user-images.githubusercontent.com/26690821/168448973-435a4728-0f1c-462b-9a3c-2355dc5e8077.png)
+> 1. Download `com.varneon.package-exporter.zip` from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+> 2. Unpack the .zip somewhere
+> 3. In VRChat Creator Companion, navigate to `Settings` > `User Packages` > `Add`
+> 4. Navigate to the unpacked folder, `com.varneon.package-exporter` and click `Select Folder`
+> 5. `Package Exporter` should now be visible under `Local User Packages` in the project view in VRChat Creator Companion
+> 6. Click `Add`
+
+</details><details><summary>
+
+### Import with [Unity Package Manager (git)](https://docs.unity3d.com/2019.4/Documentation/Manual/upm-ui-giturl.html):</summary>
+
+> 1. In the Unity toolbar, select `Window` > `Package Manager` > `[+]` > `Add package from git URL...` 
+> 2. Paste the following link: `https://github.com/Varneon/Unitypackage-Exporter.git?path=/Packages/com.varneon.package-exporter`
+
+</details><details><summary>
+
+### Import from [Unitypackage](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetPackagesImport.html):</summary>
+
+> 1. Download latest `com.varneon.package-exporter.unitypackage` from [here](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
+> 2. Import the downloaded .unitypackage into your Unity project
+
+</details>
 
 <div align="center">
 
