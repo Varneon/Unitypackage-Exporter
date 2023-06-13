@@ -776,7 +776,7 @@ namespace Varneon.PackageExporter
 #region Write Version To File
             string versionPath = activeConfiguration.GetVersionPath();
 
-            if (!string.IsNullOrEmpty(versionPath))
+            if (!string.IsNullOrEmpty(versionPath) && isVersionDirty)
             {
                 try
                 {
@@ -797,7 +797,7 @@ namespace Varneon.PackageExporter
 #region Modify Manifest Version
             string manifestPath = activeConfiguration.GetManifestPath();
 
-            if (!string.IsNullOrEmpty(manifestPath))
+            if (!string.IsNullOrEmpty(manifestPath) && isVersionDirty)
             {
                 try
                 {
