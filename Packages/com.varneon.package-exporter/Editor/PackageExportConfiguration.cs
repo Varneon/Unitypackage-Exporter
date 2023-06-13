@@ -94,18 +94,21 @@ namespace Varneon.PackageExporter
         /// <returns>Version string</returns>
         public string GetCurrentVersion()
         {
-            Version manifestVersion = new Version();
-
             string manifestPath = GetManifestPath();
 
             if (!string.IsNullOrEmpty(manifestPath))
             {
                 PackageInfo info = PackageInfo.FindForAssetPath(manifestPath);
 
-                manifestVersion = new Version(info?.version);
+                string manifestVersion = info?.version;
+
+                if (!string.IsNullOrWhiteSpace(manifestVersion))
+                {
+                    return manifestVersion;
+                }
             }
 
-            Version fileVersion = new Version();
+            string fileVersion = null;
 
             string versionPath = GetVersionPath();
 
@@ -113,11 +116,16 @@ namespace Varneon.PackageExporter
             {
                 using (StreamReader reader = new StreamReader(versionPath))
                 {
-                    fileVersion = new Version(reader.ReadToEnd().ToLower().Trim('v'));
+                    fileVersion = reader.ReadToEnd().ToLower().Trim('v');
+                }
+
+                if (!string.IsNullOrWhiteSpace(fileVersion))
+                {
+                    return fileVersion;
                 }
             }
 
-            return ((manifestVersion >= fileVersion) ? manifestVersion : fileVersion).ToString();
+            return "0.1.0";
         }
 
         /// <summary>

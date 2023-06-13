@@ -20,7 +20,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="Notification_InvalidVersion" class="defaultMargin" style="background-color: rgb(89, 0, 0); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(196, 196, 196); border-right-color: rgb(196, 196, 196); border-top-color: rgb(196, 196, 196); border-bottom-color: rgb(196, 196, 196); display: none;">
         <Style src="ExporterWindow.uss" />
-        <ui:Label text="Invalid version! Please provide valid version in following format: [&lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;], e.g. 1.0.2" style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; white-space: normal;" />
+        <ui:Label text="Invalid version! Please provide valid SemVer compatible version!" style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; white-space: normal;" />
     </ui:VisualElement>
     <ui:Label text="Unitypackage Name:" tooltip="The final file name of the exported package" class="defaultMargin">
         <Style src="ExporterWindow.uss" />
