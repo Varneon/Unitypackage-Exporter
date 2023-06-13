@@ -371,7 +371,7 @@ namespace Varneon.PackageExporter
 
             packageVersionField = rootVisualElement.Q<TextField>("TextField_Version");
 
-            packageVersionField.RegisterValueChangedCallback(a => { IsPackageVersionValid = Version.TryParse(PackageVersion = a.newValue, out _); });
+            packageVersionField.RegisterValueChangedCallback(a => { IsPackageVersionValid = VersionUtilities.IsVersionValid(PackageVersion = a.newValue); });
 
             lastVersionIndicator = rootVisualElement.Q<VisualElement>("LastVersionIndicator");
 
@@ -518,7 +518,7 @@ namespace Varneon.PackageExporter
 
             lastVersionLabel.text = lastPackageVersion;
 
-            IsPackageVersionValid = true;
+            IsPackageVersionValid = VersionUtilities.IsVersionValid(lastPackageVersion);
 
             pathsToExport.Clear();
 
