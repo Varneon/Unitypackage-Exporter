@@ -1,3 +1,8 @@
+> # :warning: Unitypackage Exporter is not compatible with Unity 2022.3!
+> Fixing this package will take longer than expected and should not be used in said Unity version!
+> 
+> Please see this [Milestone](https://github.com/Varneon/Unitypackage-Exporter/milestone/2) to check the current status of the compatibility.
+
 <div>
 
 # Unitypackage Exporter [![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/Unitypackage-Exporter?style=flat&label=Stars)](https://github.com/Varneon/Unitypackage-Exporter/stargazers) [![GitHub all releases](https://img.shields.io/github/downloads/Varneon/Unitypackage-Exporter/total?color=blue&label=Downloads&style=flat)](https://github.com/Varneon/Unitypackage-Exporter/releases) [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/Unitypackage-Exporter?color=blue&label=Release&sort=semver&style=flat)](https://github.com/Varneon/Unitypackage-Exporter/releases/latest)
